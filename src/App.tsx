@@ -87,7 +87,7 @@ function Converter() {
           <Link
             to="/reference"
             className="inline-flex items-center text-indigo-700 dark:text-white hover:text-indigo-900 dark:hover:text-indigo-200 transition-colors"
-            title={t.tooltips.reference}
+            title={t.reference}
           >
             <BookOpen className="mr-2" /> {t.reference}
           </Link>
