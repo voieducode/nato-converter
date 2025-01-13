@@ -1,7 +1,7 @@
-import React from 'react';
-import { natoPhoneticAlphabet } from '../lib/natoPhonetic';
-import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { natoPhoneticAlphabet } from "../lib/natoPhonetic";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function Reference() {
   return (
@@ -13,9 +13,11 @@ export function Reference() {
         >
           <ArrowLeft className="mr-2" /> Back to converter
         </Link>
-        
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">NATO Phonetic Alphabet Reference</h1>
-        
+
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+          NATO Phonetic Alphabet Reference
+        </h1>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Object.entries(natoPhoneticAlphabet).map(([letter, word]) => (
             <div

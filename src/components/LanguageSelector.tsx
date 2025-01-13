@@ -1,14 +1,15 @@
-import React from 'react';
-import { Languages } from 'lucide-react';
-import { useI18n } from '../lib/i18n';
+import React from "react";
+import { Languages } from "lucide-react";
+import { translations, useI18n } from "../lib/i18n";
 
 const languages = {
-  en: 'English',
-  fr: 'Français',
-  de: 'Deutsch',
-  es: 'Español',
-  ar: 'العربية',
-  ja: '日本語'
+  en: "English",
+  fr: "Français",
+  de: "Deutsch",
+  es: "Español",
+  ar: "العربية",
+  ja: "日本語",
+  sw: "Kiswahili",
 };
 
 export function LanguageSelector() {
@@ -19,14 +20,18 @@ export function LanguageSelector() {
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) &&
-          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -54,7 +59,9 @@ export function LanguageSelector() {
                 setIsOpen(false);
               }}
               className={`w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                language === code ? 'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300' : 'text-gray-700 dark:text-gray-300'
+                language === code
+                  ? "bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300"
+                  : "text-gray-700 dark:text-gray-300"
               }`}
             >
               {name}

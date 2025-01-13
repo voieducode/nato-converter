@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Volume2, BookOpen } from 'lucide-react';
-import { Menu } from './components/Menu';
-import { Reference } from './components/Reference';
-import { ThemeToggle } from './components/ThemeToggle';
-import { HelpButton } from './components/Help';
-import { LanguageSelector } from './components/LanguageSelector';
-import { convertToNato, speak } from './lib/natoPhonetic';
-import { initTheme } from './lib/theme';
-import { useI18n, translations } from './lib/i18n';
+import React, { useState, useEffect, useCallback } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Volume2, BookOpen } from "lucide-react";
+import { Menu } from "./components/Menu";
+import { Reference } from "./components/Reference";
+import { ThemeToggle } from "./components/ThemeToggle";
+import { HelpButton } from "./components/Help";
+import { LanguageSelector } from "./components/LanguageSelector";
+import { convertToNato, speak } from "./lib/natoPhonetic";
+import { initTheme } from "./lib/theme";
+import { useI18n, translations } from "./lib/i18n";
 
 const MAX_LENGTH = 300;
 const MAX_FAVORITES = 5;
@@ -17,39 +17,42 @@ const DEBOUNCE_DELAY = 2000;
 function Converter() {
   const { language } = useI18n();
   const t = translations[language];
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [history, setHistory] = useState<string[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem('natoHistory') || '[]');
+      return JSON.parse(localStorage.getItem("natoHistory") || "[]");
     } catch {
       return [];
     }
   });
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem('natoFavorites') || '[]');
+      return JSON.parse(localStorage.getItem("natoFavorites") || "[]");
     } catch {
       return [];
     }
   });
 
   useEffect(() => {
-    localStorage.setItem('natoHistory', JSON.stringify(history));
+    localStorage.setItem("natoHistory", JSON.stringify(history));
   }, [history]);
 
   useEffect(() => {
-    localStorage.setItem('natoFavorites', JSON.stringify(favorites));
+    localStorage.setItem("natoFavorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const debouncedUpdateHistory = useCallback((newText: string) => {
-    if (newText && !history.includes(newText)) {
-      setHistory(prev => [newText, ...prev.slice(0, 19)]);
-    }
-  }, [history]);
+  const debouncedUpdateHistory = useCallback(
+    (newText: string) => {
+      if (newText && !history.includes(newText)) {
+        setHistory((prev) => [newText, ...prev.slice(0, 19)]);
+      }
+    },
+    [history],
+  );
 
   useEffect(() => {
     if (!text) return;
-    
+
     const timeoutId = setTimeout(() => {
       debouncedUpdateHistory(text);
     }, DEBOUNCE_DELAY);
@@ -69,20 +72,20 @@ function Converter() {
   };
 
   const toggleFavorite = (text: string) => {
-    setFavorites(prev => {
+    setFavorites((prev) => {
       if (prev.includes(text)) {
-        return prev.filter(t => t !== text);
+        return prev.filter((t) => t !== text);
       }
       return [...prev.slice(0, MAX_FAVORITES - 1), text];
     });
   };
 
-  const natoText = text ? convertToNato(text) : '';
+  const natoText = text ? convertToNato(text) : "";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-600 dark:to-purple-700 text-gray-900 dark:text-white p-6 transition-colors">
       <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 mt-10">
           <h1 className="text-3xl font-bold">{t.title}</h1>
           <Link
             to="/reference"

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Menu as MenuIcon, Star, History, X } from 'lucide-react';
+import React, { useEffect, useRef } from "react";
+import { Menu as MenuIcon, Star, History, X } from "lucide-react";
 
 interface MenuProps {
   history: string[];
@@ -9,23 +9,32 @@ interface MenuProps {
   onClearHistory: () => void;
 }
 
-export function Menu({ history, favorites, onSelectText, onToggleFavorite, onClearHistory }: MenuProps) {
+export function Menu({
+  history,
+  favorites,
+  onSelectText,
+  onToggleFavorite,
+  onClearHistory,
+}: MenuProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dialogRef.current && !dialogRef.current.contains(event.target as Node)) {
+      if (
+        dialogRef.current &&
+        !dialogRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -41,7 +50,7 @@ export function Menu({ history, favorites, onSelectText, onToggleFavorite, onCle
 
       {isOpen && (
         <div className="fixed inset-0 bg-gray-800/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div 
+          <div
             ref={dialogRef}
             className="bg-white/95 dark:bg-gray-900/95 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto relative transition-colors"
           >
@@ -59,7 +68,9 @@ export function Menu({ history, favorites, onSelectText, onToggleFavorite, onCle
                   <Star size={20} className="text-yellow-400" /> Favorites
                 </h2>
                 {favorites.length === 0 ? (
-                  <p className="text-gray-500 dark:text-gray-400">No favorites yet</p>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    No favorites yet
+                  </p>
                 ) : (
                   <ul className="space-y-2">
                     {favorites.map((text, index) => (
@@ -100,7 +111,9 @@ export function Menu({ history, favorites, onSelectText, onToggleFavorite, onCle
                   </button>
                 </div>
                 {history.length === 0 ? (
-                  <p className="text-gray-500 dark:text-gray-400">No history yet</p>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    No history yet
+                  </p>
                 ) : (
                   <ul className="space-y-2">
                     {history.map((text, index) => (
@@ -117,8 +130,8 @@ export function Menu({ history, favorites, onSelectText, onToggleFavorite, onCle
                             size={16}
                             className={`${
                               favorites.includes(text)
-                                ? 'text-yellow-400'
-                                : 'text-gray-400 opacity-0 group-hover:opacity-100'
+                                ? "text-yellow-400"
+                                : "text-gray-400 opacity-0 group-hover:opacity-100"
                             } cursor-pointer transition-opacity`}
                             onClick={(e) => {
                               e.stopPropagation();

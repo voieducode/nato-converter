@@ -1,6 +1,6 @@
-import React from 'react';
-import { HelpCircle, X } from 'lucide-react';
-import { useI18n, translations } from '../lib/i18n';
+import React from "react";
+import { HelpCircle, X } from "lucide-react";
+import { useI18n, translations } from "../lib/i18n";
 
 interface HelpDialogProps {
   isOpen: boolean;
@@ -25,32 +25,44 @@ function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         </button>
 
         <div className="p-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t.help}</h2>
-          
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            {t.help}
+          </h2>
+
           <div className="space-y-4 text-gray-700 dark:text-gray-300">
             <section>
-              <h3 className="font-semibold text-lg mb-2">1. Basic Usage</h3>
-              <p>Type or paste any text into the input field. The converter will automatically translate each letter into its NATO phonetic alphabet equivalent.</p>
+              <h3 className="font-semibold text-lg mb-2">
+                {t.helpContent.basicUsageTitle}
+              </h3>
+              <p>{t.helpContent.basicUsageText}</p>
             </section>
 
             <section>
-              <h3 className="font-semibold text-lg mb-2">2. Speech Synthesis</h3>
-              <p>Click the speaker icon to hear the phonetic pronunciation of your converted text.</p>
+              <h3 className="font-semibold text-lg mb-2">
+                {t.helpContent.speechSynthesisTitle}
+              </h3>
+              <p>{t.helpContent.speechSynthesisText}</p>
             </section>
 
             <section>
-              <h3 className="font-semibold text-lg mb-2">3. History & Favorites</h3>
-              <p>Access your conversion history and favorite phrases through the menu button. You can star items to add them to your favorites.</p>
+              <h3 className="font-semibold text-lg mb-2">
+                {t.helpContent.historyFavoritesTitle}
+              </h3>
+              <p>{t.helpContent.historyFavoritesText}</p>
             </section>
 
             <section>
-              <h3 className="font-semibold text-lg mb-2">4. Theme</h3>
-              <p>Toggle between light, dark, and system theme using the theme button in the top-left corner.</p>
+              <h3 className="font-semibold text-lg mb-2">
+                {t.helpContent.themeTitle}
+              </h3>
+              <p>{t.helpContent.themeText}</p>
             </section>
 
             <section>
-              <h3 className="font-semibold text-lg mb-2">5. Reference</h3>
-              <p>View the complete NATO phonetic alphabet reference by clicking the reference link.</p>
+              <h3 className="font-semibold text-lg mb-2">
+                {t.helpContent.referenceTitle}
+              </h3>
+              <p>{t.helpContent.referenceText}</p>
             </section>
           </div>
         </div>
