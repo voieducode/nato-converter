@@ -1,4 +1,3 @@
-import React from "react";
 import { natoPhoneticAlphabet } from "../lib/natoPhonetic";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";

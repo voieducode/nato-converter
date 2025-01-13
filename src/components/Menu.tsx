@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Menu as MenuIcon, Star, History, X } from "lucide-react";
+import { translations, useI18n } from "../lib/i18n";
 
 interface MenuProps {
   history: string[];
@@ -16,6 +17,9 @@ export function Menu({
   onToggleFavorite,
   onClearHistory,
 }: MenuProps) {
+  const { language } = useI18n();
+  const t = translations[language];
+
   const [isOpen, setIsOpen] = React.useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +47,7 @@ export function Menu({
       <button
         onClick={() => setIsOpen(true)}
         className="fixed top-4 right-4 p-2 rounded-full bg-indigo-600 dark:bg-indigo-500 text-white hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors"
-        aria-label="Open history"
+        aria-label={t.openHistory}
       >
         <MenuIcon size={24} />
       </button>
@@ -57,7 +61,7 @@ export function Menu({
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Close dialog"
+              aria-label={t.closeDialog}
             >
               <X size={20} />
             </button>
@@ -65,11 +69,11 @@ export function Menu({
             <div className="p-6">
               <div className="mb-8">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                  <Star size={20} className="text-yellow-400" /> Favorites
+                  <Star size={20} className="text-yellow-400" /> {t.favorites}
                 </h2>
                 {favorites.length === 0 ? (
                   <p className="text-gray-500 dark:text-gray-400">
-                    No favorites yet
+                    {t.noFavorites}
                   </p>
                 ) : (
                   <ul className="space-y-2">
@@ -101,18 +105,18 @@ export function Menu({
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <History size={20} /> History
+                    <History size={20} /> {t.history}
                   </h2>
                   <button
                     onClick={onClearHistory}
                     className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white transition-colors"
                   >
-                    Clear
+                    {t.clear}
                   </button>
                 </div>
                 {history.length === 0 ? (
                   <p className="text-gray-500 dark:text-gray-400">
-                    No history yet
+                    {t.noHistory}
                   </p>
                 ) : (
                   <ul className="space-y-2">
